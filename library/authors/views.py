@@ -7,8 +7,11 @@ from .serializers import AuthorModelSerializer
 
 
 class AuthorModelViewSet(mixins.ListModelMixin,
+                         mixins.CreateModelMixin,
                          mixins.RetrieveModelMixin,
                          mixins.UpdateModelMixin,
-                         viewsets.GenericViewSet):
+                         mixins.DestroyModelMixin,
+                         viewsets.GenericViewSet,
+                         ):
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
