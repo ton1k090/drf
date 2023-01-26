@@ -1,4 +1,5 @@
 import django_filters
+from rest_framework import permissions
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ViewSet
@@ -18,6 +19,8 @@ class TodoPaginator(LimitOffsetPagination):
 
 
 class ProjectModelViewSet(ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
     pagination_class = ProjectPaginator
@@ -25,6 +28,8 @@ class ProjectModelViewSet(ModelViewSet):
 
 
 class TodoModelViewSet(ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+
     queryset = Todo.objects.all()
     serializer_class = TodoModelSerializer
     pagination_class = TodoPaginator

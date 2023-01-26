@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, permissions
 
 from rest_framework.viewsets import ModelViewSet
 from .models import Author
@@ -15,3 +15,4 @@ class AuthorModelViewSet(mixins.ListModelMixin,
                          ):
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
+    permission_classes = [permissions.IsAuthenticated]
