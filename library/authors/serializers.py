@@ -1,4 +1,5 @@
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
+from rest_framework import serializers
 from .models import Author
 
 

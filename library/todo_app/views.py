@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ViewSet
 
 from .models import Project, Todo
-from .serializers import TodoModelSerializer, ProjectModelSerializer
+from .serializers import TodoModelSerializer, ProjectModelSerializer, ProjectModelSerializerBase
 from authors.serializers import AuthorModelSerializer
 from .filters import ProjectFilter
 
@@ -19,12 +19,18 @@ class TodoPaginator(LimitOffsetPagination):
 
 
 class ProjectModelViewSet(ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
     pagination_class = ProjectPaginator
     filterset_class = ProjectFilter
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return ProjectModelSerializer
+
+        return ProjectModelSerializerBase
 
 
 class TodoModelViewSet(ModelViewSet):

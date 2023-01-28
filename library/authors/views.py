@@ -6,13 +6,7 @@ from .models import Author
 from .serializers import AuthorModelSerializer
 
 
-class AuthorModelViewSet(mixins.ListModelMixin,
-                         mixins.CreateModelMixin,
-                         mixins.RetrieveModelMixin,
-                         mixins.UpdateModelMixin,
-                         mixins.DestroyModelMixin,
-                         viewsets.GenericViewSet,
-                         ):
+class AuthorModelViewSet(ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
